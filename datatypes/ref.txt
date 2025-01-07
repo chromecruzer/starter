@@ -1,0 +1,209 @@
+C:\Users\Unique>curl -X POST https://stellax.onrender.com/generate -H "Content-Type: application/json" -d "{\"prompt\":\"hi\"}"
+Hello! It's nice to meet you. How can I assist you today?
+C:\Users\Unique>curl -X POST https://stellax.onrender.com/generate -H "Content-Type: application/json" -d "{\"prompt\":\"how do connect lib in toml of bin in rust \"}"
+{"error":"No content generated!"}
+C:\Users\Unique>curl -X POST https://stellax.onrender.com/generate -H "Content-Type: application/json" -d "{\"prompt\":\"how do connect lib in toml of bin in rust \"}"
+toml
+[dependencies]
+my-lib = { path = "../my-lib" }
+C:\Users\Unique>curl -X POST https://stellax.onrender.com/generate -H "Content-Type: application/json" -d "{\"prompt\":\"how to define default trait for enums in rust \"}"
+You can define a default trait implementation for enums in Rust using the Default trait. The Default trait provides a default value for a type, which can be useful when you want to initialize a variable with a default value.
+
+To implement the Default trait for an enum, you can use the #[default] attribute on one of the enum variants. The variant that is annotated with #[default] will be the default value for the enum.
+
+For example, the following code defines an enum called MyEnum with two variants, A and B. The A variant is the default variant.
+
+
+#[derive(Default)]
+enum MyEnum {
+    A,
+    B,
+}
+
+
+You can now use the Default trait to initialize a MyEnum variable with the default value. For example, the following code initializes a MyEnum variable to the default value (A).
+
+
+let myenum = MyEnum::default();
+
+
+You can also use the Default trait to create a MyEnum value from a string. For example, the following code creates a MyEnum value from the string "A".
+
+
+let myenum = MyEnum::fromstr("A").unwrap();
+C:\Users\Unique>curl -X POST https://stellax.onrender.com/generate -H "Content-Type: application/json" -d "{\"prompt\":\"how to use the reqwest trait in rust with blocking enabled in built async \"}"
+To use the reqwest trait in Rust with blocking enabled in built async, you can do the following:
+
+1. Add the following dependency to your Cargo.toml file:
+
+
+[dependencies]
+reqwest = { version = "0.11", features = ["blocking"] }
+
+
+2. In your code, you can use the blocking feature of the reqwest crate by calling the blocking method on the Client object. This will return a blocking client that can be used to make synchronous requests.
+
+
+use reqwest::blocking::Client;
+
+let client = Client::new();
+let response = client.get("https://example.com").send();
+
+
+3. You can now use the Response object to access the response from the server.
+
+
+let body = response.text().unwrap();
+
+
+Here is an example of a complete program that uses the reqwest trait with blocking enabled:
+
+
+use reqwest::blocking::Client;
+
+fn main() {
+    let client = Client::new();
+    let response = client.get("https://example.com").send();
+
+    let body = response.text().unwrap();
+
+    println!("Body: {}", body);
+}
+C:\Users\Unique>curl -X POST https://stellax.onrender.com/generate -H "Content-Type: application/json" -d "{\"prompt\":\"how to use the reqwest trait in rust with blocking enabled in built async show me all GET POST DELETE PUT\"}"
+rust
+use reqwest::blocking::Client;
+
+// GET request
+let client = Client::new();
+let response = client.get("https://example.com").send().unwrap();
+let body = response.text().unwrap();
+
+// POST request
+let client = Client::new();
+let response = client.post("https://example.com")
+    .body("Hello, world!")
+    .send()
+    .unwrap();
+let body = response.text().unwrap();
+
+// DELETE request
+let client = Client::new();
+let response = client.delete("https://example.com").send().unwrap();
+let body = response.text().unwrap();
+
+// PUT request
+let client = Client::new();
+let response = client.put("https://example.com")
+    .body("Hello, world!")
+    .send()
+    .unwrap();
+let body = response.text().unwrap();
+C:\Users\Unique>
+
+
+
+
+
+////////////////////
+
+[package]
+name = "chumma"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+datatypes = {path = "./datatypes"}
+reqwest = { version = "0.12.12", features = ["blocking"] }
+
+[dev-dependencies]
+
+[workspace]
+members = [
+    "datatypes",
+]
+
+
+
+
+//////////////
+
+Setup
+Run cargo add csv to add the latest version of the csv crate to your Cargo.toml.
+
+If you want to use Serde’s custom derive functionality on your custom structs, then run cargo add serde --features derive to add the serde crate with its derive feature enabled to your Cargo.toml.
+
+Example
+This example shows how to read CSV data from stdin and print each record to stdout.
+
+There are more examples in the cookbook.
+
+use std::{error::Error, io, process};
+
+fn example() -> Result<(), Box<dyn Error>> {
+    // Build the CSV reader and iterate over each record.
+    let mut rdr = csv::Reader::from_reader(io::stdin());
+    for result in rdr.records() {
+        // The iterator yields Result<StringRecord, Error>, so we check the
+        // error here.
+        let record = result?;
+        println!("{:?}", record);
+    }
+    Ok(())
+}
+
+fn main() {
+    if let Err(err) = example() {
+        println!("error running example: {}", err);
+        process::exit(1);
+    }
+}
+
+
+///////////////////////////
+
+
+#![allow(dead_code)]
+#![allow(unused_variables)]
+
+// use rocket::fs::FileServer;
+// use rocket::{self, get, launch, routes};
+
+// #[get("/<name>/<age>")]
+// fn hello(name: &str, age: u8) -> String {
+//     format!("Hello, {} year old named {}!", age, name)
+// }
+
+// #[launch]
+// fn rocket() -> _ {
+//     rocket::build()
+//         .mount("/home", routes![hello])
+//         .mount("/", FileServer::from("client"))
+// }
+
+/// Lets Begin Nigga..!!!
+///
+///
+///
+//  fn main() {
+// let val: i32 = 42;
+
+// // Create multiple levels of references
+// let ref1 = &val;         // `&i32`
+// let ref2 = &ref1;        // `&&i32`
+// let ref3 = &ref2;        // `&&&i32`
+// let ref4: &&&&i32 = &ref3;
+
+// println!("Value: {}", ***ref3); // Dereference all levels to get to the value
+// println!("Address of val: {:p}", ref3); // Address of the reference
+// }
+
+fn main() {
+    let val: i32 = 99;
+
+    // Create nested references manually
+    let ref1: &i32 = &val; // `&i32`
+    let ref2: &&i32 = &ref1; // `&&i32`
+    let ref3: &&&i32 = &ref2; // `&&&i32`
+
+    println!("Value: {}", ***ref3); // Dereference three times to get the value
+}
