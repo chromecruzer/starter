@@ -1,3 +1,4 @@
+mod api;
 use crossbeam::channel;
 use datatypes::criteria::{Criteria, Gender};
 use tokio::time::{sleep, Duration};
@@ -7,6 +8,8 @@ use tokio::time::{sleep, Duration};
 async fn main() {
     println!("Starting...");
     sleep(Duration::from_secs(2)).await;
+    sleep(Duration::from_secs(9)).await;
+    api::get_route();
     println!("Finished after 2 seconds!");
     let mut person1 = Criteria::new(65, Gender::Others, "Indian".to_string());
     person1.display_stats();
@@ -34,6 +37,9 @@ async fn main() {
     });
 
     println!("Received: {}", receiver.recv().unwrap());
+
+    sleep(Duration::from_secs(2)).await;
+    api::delete_route();
 }
 
 async fn read_from_db(count: i8) {
